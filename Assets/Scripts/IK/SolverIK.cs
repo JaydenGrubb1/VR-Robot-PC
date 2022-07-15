@@ -6,8 +6,9 @@ namespace Robot.IK
     {
         public Transform end;
         public Transform target;
-        public float rate = 5;
-        public float threshhold = 1;
+        public float rate = 0.5f;
+        public float threshhold = 1f;
+        public int maxSteps = 10;
 
         private JointIK[] joints;
 
@@ -31,12 +32,15 @@ namespace Robot.IK
 
         private void Update()
         {
-            if (Vector3.Distance(end.position, target.position) > threshhold)
+            for (int i = 0; i < maxSteps; i++)
             {
-                foreach (JointIK joint in joints)
+                if (Vector3.Distance(end.position, target.position) > threshhold)
                 {
-                    float slope = CalculateSlope(joint);
-                    joint.Rotate(-slope * rate);
+                    foreach (JointIK joint in joints)
+                    {
+                        float slope = CalculateSlope(joint);
+                        joint.Rotate(-slope * rate);
+                    }
                 }
             }
         }

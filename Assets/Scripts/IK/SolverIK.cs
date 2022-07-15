@@ -1,34 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Robot.IK
 {
-    public class SolverIK : MonoBehaviour
+	public class SolverIK : MonoBehaviour
     {
         public Transform end;
         public Transform target;
         public float rate = 5;
         public float threshhold = 1;
 
-        public List<JointIK> joints = new List<JointIK>();
+        private JointIK[] joints;
 
-        private float calculateSlope(JointIK joint)
+        private float CalculateSlope(JointIK joint)
 		{
             float theta = 0.01f;
 
             float startDist = Vector3.Distance(target.position, end.position);
-            joint.rotate(theta);
+            joint.Rotate(theta);
 
             float endDist = Vector3.Distance(target.position, end.position);
-            joint.rotate(-theta);
+            joint.Rotate(-theta);
 
             return (endDist - startDist) / theta;
 		}
 
         private void Start()
         {
-            joints.AddRange(GetComponentsInChildren<JointIK>());
+            joints = GetComponentsInChildren<JointIK>();
         }
 
         private void Update()
@@ -37,8 +35,8 @@ namespace Robot.IK
             {
                 foreach (JointIK joint in joints)
                 {
-                    float slope = calculateSlope(joint);
-                    joint.rotate(-slope * rate);
+                    float slope = CalculateSlope(joint);
+                    joint.Rotate(-slope * rate);
                 }
             }
         }

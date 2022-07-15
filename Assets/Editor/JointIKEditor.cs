@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 namespace Robot.IK
 {
-    [CustomEditor(typeof(JointIK))]
+	[CustomEditor(typeof(JointIK))]
     public class JointIKEditor : Editor
     {
 		ArcHandle lowerArc = new ArcHandle();
 		ArcHandle upperArc = new ArcHandle();
-		ArcHandle startArc = new ArcHandle();
 
 		public override void OnInspectorGUI()
 		{
@@ -99,28 +96,6 @@ namespace Robot.IK
 						Undo.RecordObject(joint, "Change Joint Limits");
 						joint.limits.upper = upperArc.angle;
 					}
-				}
-			}
-
-			if (joint.startAngle < -180)
-				joint.startAngle = -180;
-			if (joint.startAngle > 180)
-				joint.startAngle = 180;
-
-			Handles.color = Color.black;
-
-			startArc.angle = joint.startAngle;
-			Vector3 norm3 = joint.axis;
-			Matrix4x4 mat3 = Matrix4x4.TRS(joint.transform.position, Quaternion.LookRotation(cross, norm3), Vector3.one * 7);
-
-			using (new Handles.DrawingScope(mat3))
-			{
-				EditorGUI.BeginChangeCheck();
-				startArc.DrawHandle();
-				if (EditorGUI.EndChangeCheck())
-				{
-					Undo.RecordObject(joint, "Change Start Angle");
-					joint.startAngle = startArc.angle;
 				}
 			}
 

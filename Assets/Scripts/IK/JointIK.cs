@@ -11,6 +11,12 @@ namespace Robot.IK
 		public bool useLimits = false;
 		public Limits limits = new Limits(-60, 60);
 		public Vector3 axis = Vector3.right;
+
+		public float rotate(float theta)
+		{
+			transform.Rotate(axis, theta);
+			return 0;
+		}
 	}
 
 	[Serializable]

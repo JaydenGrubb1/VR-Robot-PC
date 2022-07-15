@@ -228,6 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227307931}
+  - component: {fileID: 227307932}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -251,6 +252,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227307932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227307930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 097a39996545be745879c66d3b8ba5a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  end: {fileID: 42381424}
+  target: {fileID: 1993902416}
+  rate: 0.5
+  threshhold: 0.5
+  joints: []
 --- !u!1 &229206346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,8 +1304,8 @@ MonoBehaviour:
   startAngle: 0
   useLimits: 1
   limits:
-    lower: -140
-    upper: 116.72661
+    lower: -41.36633
+    upper: 41.737305
   axis: {x: 0, y: 1, z: 0}
 --- !u!1 &1993902415
 GameObject:

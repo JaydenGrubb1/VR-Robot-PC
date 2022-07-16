@@ -3,27 +3,27 @@ using UnityEngine;
 namespace Robot
 {
 	public class GameManager : MonoBehaviour
-    {
-        private static GameManager instance;
+	{
+		private static GameManager instance;
 
-        public void Awake()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else
-            {
-                Destroy(this);
-            }
-        }
+		public void Awake()
+		{
+			if (instance == null)
+			{
+				instance = this;
+			}
+			else
+			{
+				Destroy(this);
+			}
+		}
 
-        public static void Quit()
-        {
-            Application.Quit();
+		public static void Quit()
+		{
+			Application.Quit();
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+			UnityEditor.EditorApplication.isPlaying = false;
 #endif
-        }
-    }
+		}
+	}
 }

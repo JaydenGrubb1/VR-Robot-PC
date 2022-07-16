@@ -3,33 +3,35 @@ using UnityEngine;
 namespace Robot.IK
 {
 	public class SolverIK : MonoBehaviour
-    {
-        public TargetIK primaryTarget;
-        public float rate = 0.5f;
-        public float threshhold = 1f;
-        public int maxSteps = 10;
+	{
+		public TargetIK primaryTarget;
+		public float rate = 0.5f;
+		public float threshhold = 1f;
+		public int maxSteps = 10;
 
-        public JointIK[] joints;
-        public TargetIK[] targets;
+		public JointIK[] joints;
+		public TargetIK[] targets;
 
-        private float CalculateSlope(JointIK joint)
+		private float CalculateSlope(JointIK joint)
 		{
-            float theta = 0.01f;
-            float slope = 0;
-            float totalWeight = 0;
+			float theta = 0.01f;
+			float slope = 0;
+			float totalWeight = 0;
 
-            foreach (TargetIK target in targets)
-                target.BeginGradient();
-            
-            joint.Rotate(theta);
+			foreach (TargetIK target in targets)
+				target.BeginGradient();
 
-            foreach (TargetIK target in targets)
-            {
-                totalWeight += target.weight;
-                slope += target.EndGradient(theta) * target.weight;
-            }
+			joint.Rotate(theta);
 
-            return slope / totalWeight;
+			foreach (TargetIK target in targets)
+			{
+				totalWeight += target.weight;
+				slope += target.EndGradient(theta) * target.weight;
+			}
+
+			joint.Rotate(-theta);
+
+			return slope / totalWeight;
 		}
 
 		public void FindComponents()
@@ -38,25 +40,25 @@ namespace Robot.IK
 			targets = GetComponentsInChildren<TargetIK>();
 		}
 
-        public void ClearComponents()
+		public void ClearComponents()
 		{
-            joints = null;
-            targets = null;
+			joints = null;
+			targets = null;
 		}
 
 		private void Update()
-        {
-            for (int i = 0; i < maxSteps; i++)
-            {
-                if (primaryTarget.GetDistance() > threshhold)
-                {
-                    foreach (JointIK joint in joints)
-                    {
-                        float slope = CalculateSlope(joint);
-                        joint.Rotate(-slope * rate);
-                    }
-                }
-            }
-        }
-    }
+		{
+			for (int i = 0; i < maxSteps; i++)
+			{
+				if (primaryTarget.GetDistance() > threshhold)
+				{
+					foreach (JointIK joint in joints)
+					{
+						float slope = CalculateSlope(joint);
+						joint.Rotate(-slope * rate);
+					}
+				}
+			}
+		}
+	}
 }

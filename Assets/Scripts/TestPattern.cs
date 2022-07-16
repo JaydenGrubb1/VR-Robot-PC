@@ -4,6 +4,7 @@ using UnityEngine;
 public class TestPattern : MonoBehaviour
 {
     public Transform targetHandle;
+    [Range(0f, 10f)]
     public float switchDelay = 3f;
 
     private List<Transform> targets = new List<Transform>();

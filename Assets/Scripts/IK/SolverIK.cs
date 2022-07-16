@@ -4,37 +4,51 @@ namespace Robot.IK
 {
 	public class SolverIK : MonoBehaviour
     {
-        public Transform end;
-        public Transform target;
+        public TargetIK primaryTarget;
         public float rate = 0.5f;
         public float threshhold = 1f;
         public int maxSteps = 10;
 
-        private JointIK[] joints;
+        public JointIK[] joints;
+        public TargetIK[] targets;
 
         private float CalculateSlope(JointIK joint)
 		{
             float theta = 0.01f;
+            float slope = 0;
+            float totalWeight = 0;
 
-            float startDist = Vector3.Distance(target.position, end.position);
+            foreach (TargetIK target in targets)
+                target.BeginGradient();
+            
             joint.Rotate(theta);
 
-            float endDist = Vector3.Distance(target.position, end.position);
-            joint.Rotate(-theta);
+            foreach (TargetIK target in targets)
+            {
+                totalWeight += target.weight;
+                slope += target.EndGradient(theta) * target.weight;
+            }
 
-            return (endDist - startDist) / theta;
+            return slope / totalWeight;
 		}
 
-        private void Start()
-        {
-            joints = GetComponentsInChildren<JointIK>();
-        }
+		public void FindComponents()
+		{
+			joints = GetComponentsInChildren<JointIK>();
+			targets = GetComponentsInChildren<TargetIK>();
+		}
 
-        private void Update()
+        public void ClearComponents()
+		{
+            joints = null;
+            targets = null;
+		}
+
+		private void Update()
         {
             for (int i = 0; i < maxSteps; i++)
             {
-                if (Vector3.Distance(end.position, target.position) > threshhold)
+                if (primaryTarget.GetDistance() > threshhold)
                 {
                     foreach (JointIK joint in joints)
                     {

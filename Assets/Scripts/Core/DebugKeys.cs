@@ -1,18 +1,17 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Robot
 {
 	public class DebugKeys : MonoBehaviour
-    {
-		[SerializeField] private Key resetPoseKey;
+	{
+		[SerializeField] private KeyCode resetPoseKey = KeyCode.R;
 
-        private void Update()
-        {
-			if (Keyboard.current[resetPoseKey].wasPressedThisFrame)
+		private void Update()
+		{
+			if (Input.GetKeyDown(resetPoseKey))
 			{
 				VRManager.ResetPose();
 			}
-        }
-    }
+		}
+	}
 }

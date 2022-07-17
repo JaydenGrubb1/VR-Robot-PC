@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Robot
+namespace Robot.IK
 {
 	[CustomEditor(typeof(TestPattern))]
 	public class TestPatternEditor : Editor

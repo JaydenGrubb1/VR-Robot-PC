@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Robot
+namespace Robot.IK
 {
 	public class TestPattern : MonoBehaviour
 	{

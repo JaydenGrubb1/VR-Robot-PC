@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using Valve.VR;
 
 namespace Robot
@@ -18,7 +15,7 @@ namespace Robot
 		public static Transform LeftHandTracker { get { return instance.leftHandTracker; } }
 		public static Transform RightHandTracker { get { return instance.rightHandTracker; } }
 
-		public void Awake()
+		private void Awake()
 		{
 			if (instance == null)
 			{

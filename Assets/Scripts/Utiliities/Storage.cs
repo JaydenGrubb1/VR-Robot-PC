@@ -5,12 +5,6 @@ using UnityEngine;
 
 namespace Robot.Utilities
 {
-	public enum SerializationMethod
-	{
-		Binary,
-		Json
-	};
-
 	public static class Storage
 	{
 		public static T Load<T>(FileInfo file, SerializationMethod method)
@@ -89,4 +83,9 @@ namespace Robot.Utilities
 			}
 		}
 	}
+	public enum SerializationMethod
+	{
+		Binary,
+		Json
+	};
 }

@@ -58,3 +58,7 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# SteamVR API
+# /[Aa]ssets/SteamVR
+# /[Aa]ssets/SteamVR_Input
+# /[Aa]ssets/SteamVR_Resources

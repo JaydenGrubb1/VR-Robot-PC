@@ -16,6 +16,8 @@ namespace Robot
 			{
 				Destroy(this);
 			}
+
+			Config.Load();
 		}
 
 		public static void Quit()

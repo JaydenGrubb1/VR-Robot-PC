@@ -1,0 +1,20 @@
+{
+    "lastUsedProfile": 0,
+    "profiles": [
+        {
+            "name": "Jayden",
+            "leftShoulderOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "rightShoulderOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "leftArmLength": 0.0,
+            "rightArmLength": 0.0
+        }
+    ]
+}

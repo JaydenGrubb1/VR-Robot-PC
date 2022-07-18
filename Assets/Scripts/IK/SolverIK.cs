@@ -1,4 +1,5 @@
 using UnityEngine;
+using Robot;
 
 namespace Robot.IK
 {
@@ -8,6 +9,7 @@ namespace Robot.IK
 		public float rate = 0.5f;
 		public float threshhold = 1f;
 		public int maxSteps = 10;
+		public float scaleFactor = 1f;
 
 		public JointIK[] joints;
 		public TargetIK[] targets;
@@ -50,12 +52,12 @@ namespace Robot.IK
 		{
 			for (int i = 0; i < maxSteps; i++)
 			{
-				if (primaryTarget.GetDistance() > threshhold)
+				if (primaryTarget.GetDistance() > (threshhold * scaleFactor))
 				{
 					foreach (JointIK joint in joints)
 					{
 						float slope = CalculateSlope(joint);
-						joint.Rotate(-slope * rate);
+						joint.Rotate(-slope * (rate * scaleFactor));
 					}
 				}
 			}

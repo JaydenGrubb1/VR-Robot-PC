@@ -4,17 +4,17 @@
         {
             "name": "Jayden",
             "leftShoulderOffset": {
-                "x": 0.0,
-                "y": 0.0,
+                "x": -25.0,
+                "y": -32.0,
                 "z": 0.0
             },
             "rightShoulderOffset": {
-                "x": 0.0,
-                "y": 0.0,
+                "x": 25.0,
+                "y": -32.0,
                 "z": 0.0
             },
-            "leftArmLength": 0.0,
-            "rightArmLength": 0.0
+            "leftArmLength": 62.0,
+            "rightArmLength": 62.0
         }
     ]
 }

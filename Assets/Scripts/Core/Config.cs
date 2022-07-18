@@ -47,6 +47,16 @@ namespace Robot
 			get { return config.profiles.Count; }
 		}
 
+		public static SideLR PrimarySide
+		{
+			get { return config.primarySide; }
+			set
+			{
+				config.primarySide = value;
+				Save();
+			}
+		}
+
 		public static ConfigProfile GetProfile(int index)
 		{
 			if (index < 0 || index > config.profiles.Count)
@@ -79,6 +89,7 @@ namespace Robot
 		private class ConfigData
 		{
 			public int lastUsedProfile = 0;
+			public SideLR primarySide = SideLR.Left;
 			public List<ConfigProfile> profiles = new List<ConfigProfile>();
 		}
 
@@ -91,5 +102,12 @@ namespace Robot
 			public float leftArmLength;
 			public float rightArmLength;
 		}
+	}
+
+	[Serializable]
+	public enum SideLR
+	{
+		Left,
+		Right
 	}
 }

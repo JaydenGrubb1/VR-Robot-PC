@@ -21,6 +21,7 @@ namespace Robot
 			}
 
 			Config.Load();
+			Config.Save();
 		}
 
 		private void Update()

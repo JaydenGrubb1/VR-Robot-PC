@@ -32,7 +32,7 @@ namespace Robot
 		[Serializable]
 		private class ConfigData
 		{
-
+			public Vector3 headOffset;
 		}
 	}
 }

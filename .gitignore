@@ -62,3 +62,6 @@ crashlytics-build.properties
 /[Aa]ssets/SteamVR
 /[Aa]ssets/SteamVR_Input
 /[Aa]ssets/SteamVR_Resources
+
+# Other
+config.json

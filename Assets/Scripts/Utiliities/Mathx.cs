@@ -7,6 +7,8 @@ namespace Robot.Utilities
 {
 	public static class Mathx
 	{
+		public static bool LogWarning { get; set; } = false;
+
 		public static bool Approximately(Vector3 a, Vector3 b)
 		{
 			return Mathf.Approximately(a.x, b.x) &&
@@ -14,17 +16,27 @@ namespace Robot.Utilities
 				Mathf.Approximately(a.z, b.z);
 		}
 
-		public static Vector3 IntersectionOfLines(Vector3 p1, Vector3 d1, Vector3 p2, Vector3 d2)
+		public static Vector3? IntersectionOfLines(Vector3 p1, Vector3 d1, Vector3 p2, Vector3 d2)
 		{
 			if (Mathf.Approximately(Mathf.Abs(Vector3.Dot(d1, d2)), 1))
-				throw new ArithmeticException("Lines do not intersect");
+			{
+				if(LogWarning)
+					Debug.LogWarning("Lines do not intercept");
+
+				return null;
+			}
 
 			Vector3 d3 = p2 - p1;
 			Vector3 normal = Vector3.Cross(d1, d3);
 
 
 			if (!Approximately(p2 + d2, p2 + Vector3.ProjectOnPlane(d2, normal)))
-				throw new ArithmeticException("Lines do not intersect");
+			{
+				if(LogWarning)
+					Debug.LogWarning("Lines do not intercept");
+
+				return null;
+			}
 
 			float theta = Vector3.SignedAngle(d1, d3, normal);
 			float phi = -Vector3.SignedAngle(-d1, -d2, normal);
@@ -34,8 +46,13 @@ namespace Robot.Utilities
 			return p2 + (d2.normalized * dX);
 		}
 
-		public static Vector3 CenterOfSphere(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+		public static Vector3? CenterOfSphere(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
 		{
+			// TODO
+			// Check no points are not coincident
+			// Check C is not on line AB
+			// Check D is not on plane ABC
+
 			Vector3 ab = b - a;
 			Vector3 ac = c - a;
 			Vector3 circleNormal = Vector3.Cross(ab, ac);
@@ -44,7 +61,7 @@ namespace Robot.Utilities
 
 			Vector3 centerLine = IntersectionOfLines(
 				abMid, Vector3.Cross(ab, circleNormal),
-				acMid, Vector3.Cross(ac, circleNormal));
+				acMid, Vector3.Cross(ac, circleNormal)).Value;
 
 			Vector3 dCirc = Vector3.ProjectOnPlane(d, circleNormal) + Vector3.Project(centerLine, circleNormal);
 			Vector3 edge = ((dCirc - centerLine).normalized * (a - centerLine).magnitude) + centerLine;
@@ -54,7 +71,7 @@ namespace Robot.Utilities
 			Vector3 edgeRight = Vector3.Cross(edgeMid - edge, edge - centerLine);
 			Vector3 edgeIn = Vector3.Cross(edgeRight, edgeMid - edge);
 
-			Vector3 center = IntersectionOfLines(centerLine, circleNormal, edgeMid, edgeIn);
+			Vector3 center = IntersectionOfLines(centerLine, circleNormal, edgeMid, edgeIn).Value;
 
 			return center;
 		}

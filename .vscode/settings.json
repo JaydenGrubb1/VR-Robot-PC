@@ -1,0 +1,14 @@
+{
+	"files.exclude": {
+		"**/*.*.meta": true,
+		"**/*.csproj": true,
+		"**/*.mat": true,
+		"**/*.meta": true,
+		"**/*.prefab": true,
+		"**/*.unity": true,
+		"**/*.unityproj": true,
+		"**/Library": true,
+		"**/ProjectSettings": true,
+		"**/Temp": true
+	}
+}

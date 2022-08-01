@@ -50,6 +50,16 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/ControllerA",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
+      "name": "/actions/default/in/ControllerB",
+      "type": "boolean",
+      "requirement": "mandatory"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },

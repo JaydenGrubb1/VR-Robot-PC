@@ -40,14 +40,15 @@ namespace Robot
 		{
 			average = Vector3.zero;
 			int count = 0;
+			int div = samples.Count / 4;
 
-			for (int i = 0; i + 4 < samples.Count; i += 4)
+			for (int i = 0; i < div; i++)
 			{
 				Vector3? center = Mathx.CenterOfSphere(
 					samples[i],
-					samples[i + 1],
-					samples[i + 2],
-					samples[i + 3]
+					samples[i + div],
+					samples[i + (2 * div)],
+					samples[i + (3 * div)]
 					);
 
 				if (center.HasValue)
